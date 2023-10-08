@@ -192,7 +192,7 @@ def get_readable_message():
         else:
             msg += f"\n<b>Size: <code>{download.size()}</b></code>"
         msg += f"\n<b>Elapsed: <code>{get_readable_time(time() - download.message.date.timestamp())}</b></code>"
-        msg += f"\n/stop_{download.gid()[:8]}\n"
+        msg += f"\n/stop_{download.gid()[:8]}"
         msg += f"\n<b>▬▬▬▬▬▬▬▬▬▬▬▬▬</b>"
         msg += "\n\n"
     if len(msg) == 0:
