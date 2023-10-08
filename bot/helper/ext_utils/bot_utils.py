@@ -41,17 +41,17 @@ PAGE_NO = 1
 STATUS_LIMIT = 4
 
 class MirrorStatus:
-    STATUS_UPLOADING = "🆄🄿🅻🄾🄰🅳"
-    STATUS_DOWNLOADING = "🄳🄾🆆🅽🅻🄾🄰🅳"
-    STATUS_CLONING = "🅒🅛🅞🅝🅔"
-    STATUS_QUEUEDL = "🅠🅤🅔🅤🅔 🅓🅝"
-    STATUS_QUEUEUP = "🅠🅤🅔🅤🅔 🅤🅟"
-    STATUS_PAUSED = "🅟🅐🅤🅢🅔"
-    STATUS_ARCHIVING = "🅐🅡🅒🅗🅘🅥🅔" 
-    STATUS_EXTRACTING   = "🅴🅇🅃🆁🄰🄲🆃"
-    STATUS_SPLITTING    = "🅢🅟🅛🅘🅣"
-    STATUS_CHECKING     = "🅒🅗🅔🅒🅚🅤🅟"
-    STATUS_SEEDING      = "🅢🅔🅔🅓"
+    STATUS_UPLOADING = "𝑼𝒑𝒍𝒐𝒂𝒅"
+    STATUS_DOWNLOADING = "𝑫𝒐𝒘𝒏𝒍𝒐𝒂𝒅"
+    STATUS_CLONING = "𝑪𝒍𝒐𝒏𝒆"
+    STATUS_QUEUEDL = "𝑸𝒖𝒆𝒖𝒆 𝑫𝒏"
+    STATUS_QUEUEUP = "𝐐𝐮𝐞𝐮𝐞 𝐔𝐩"
+    STATUS_PAUSED = "𝑷𝒂𝒖𝒔𝒆"
+    STATUS_ARCHIVING = "𝑨𝒓𝒄𝒉𝒊𝒗𝒆" 
+    STATUS_EXTRACTING   = "𝑬𝒙𝒕𝒓𝒂𝒄𝒕"
+    STATUS_SPLITTING    = "𝑺𝒑𝒍𝒊𝒕"
+    STATUS_CHECKING     = "𝑪𝒉𝒆𝒄𝒌"
+    STATUS_SEEDING      = "𝑺𝒆𝒆𝒅"
 
 
 class setInterval:
