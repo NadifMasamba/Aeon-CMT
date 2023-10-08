@@ -216,6 +216,7 @@ class YtSelection:
         buttons.ibutton('Cancel', 'ytq aq cancel')
         subbuttons = buttons.build_menu(5)
         msg = f'Choose Audio{i} Qaulity:\n0 is best and 10 is worst\nTimeout: {get_readable_time(self.__timeout-(time()-self.__time), True)}'
+        await editMessage(self.__reply_to, msg, subbuttons)
 
 
 def extract_info(link, options):
