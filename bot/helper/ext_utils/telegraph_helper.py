@@ -8,7 +8,7 @@ from bot import LOGGER, bot_loop, config_dict
 
 class TelegraphHelper:
     def __init__(self):
-        self.telegraph = Telegraph(domain='graph.org')
+        self.telegraph = Telegraph(domain='Telegra.ph')
         self.short_name = token_hex(4)
         self.access_token = None
         self.author_name = 'Pea Masamba'
