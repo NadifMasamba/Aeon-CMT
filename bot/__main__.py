@@ -39,8 +39,7 @@ async def stats(_, message):
     memory = virtual_memory()
     currentTime = get_readable_time(time() - botStartTime)
     osUptime = get_readable_time(time() - boot_time())
-    cpuUsage = cpu_percent(interval=0.5)
-    quote = Quote.print().split('―', 1)[0].strip().replace("“", "").replace("”", "")
+    cpuUsage = cpu_percent(interval=0.5)   
     limit_mapping = {
         'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
         'Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
@@ -70,6 +69,7 @@ async def stats(_, message):
             v = f'{v} Tasks/user'
         limitations += f'<code>{k:<11}:</code> {v}\n'
 
+    quote = Quote.print().split('―', 1)[0].strip().replace("“", "").replace("”", "")
     stats = system_info + limitations
     reply_message = await sendMessage(message, stats, photo='IMAGES')
     await deleteMessage(message)
