@@ -157,7 +157,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = '<b>Powered by Aeon</b>\n'
+    msg = "<b><a href='https://subscene.com/u/1271292'>🄿🅴🄰 🅼🄰🅂🄰🅼🄱🄰</a> </b>\n"
     button = None
     tasks = len(download_dict)
     currentTime = get_readable_time(time() - botStartTime)
@@ -170,8 +170,8 @@ def get_readable_message():
         globals()['STATUS_START'] = STATUS_LIMIT * (PAGES - 1)
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
-        msg += f"\n<b> <i>{escape(f'{download.name()}')}</i>\n\n"
-        msg += f"<b><code>{download.status()}...</b></code>\n"
+        msg += f"<code><i>{escape(f'{download.name()}')}</code></i>\n"
+        msg += f"\n</b><code>{download.status()}</code>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
             msg += f"\n<code>{progress_bar(download.progress())}</code> {download.progress()}"
             msg += f"\n{download.processed_bytes()} of {download.size()}"
@@ -180,7 +180,7 @@ def get_readable_message():
             msg += f'\n<b>Estimated: <code>{download.eta()}</b></code>'
             if hasattr(download, 'seeders_num'):
                 try:
-                    msg += f"\n<b>Seeders: <code>{download.seeders_num()} | <b>Leechers: <code>{download.leechers_num()}</b></code>"
+                    msg += f"\n<b>Seeders: <code>{download.seeders_num()}</b></code> | <b>Leechers: <code>{download.leechers_num()}</b></code>"
                 except:
                     pass
         elif download.status() == MirrorStatus.STATUS_SEEDING:
