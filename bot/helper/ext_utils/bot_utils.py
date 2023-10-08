@@ -41,17 +41,17 @@ PAGE_NO = 1
 STATUS_LIMIT = 4
 
 class MirrorStatus:
-    STATUS_UPLOADING = "🆄🄿🅻🄾🄰🅳"
-    STATUS_DOWNLOADING = "🄳🄾🆆🅽🅻🄾🄰🅳"
-    STATUS_CLONING = "🅒🅛🅞🅝🅔"
-    STATUS_QUEUEDL = "🅠🅤🅔🅤🅔 🅓🅝"
-    STATUS_QUEUEUP = "🅠🅤🅔🅤🅔 🅤🅟"
-    STATUS_PAUSED = "🅟🅐🅤🅢🅔"
-    STATUS_ARCHIVING = "🅐🅡🅒🅗🅘🅥🅔" 
-    STATUS_EXTRACTING   = "🅴🅇🅃🆁🄰🄲🆃"
-    STATUS_SPLITTING    = "🅢🅟🅛🅘🅣"
-    STATUS_CHECKING     = "🅒🅗🅔🅒🅚🅤🅟"
-    STATUS_SEEDING      = "🅢🅔🅔🅓"
+    STATUS_UPLOADING = "Uploading"
+    STATUS_DOWNLOADING = "Downloading"
+    STATUS_CLONING = "Cloning"
+    STATUS_QUEUEDL = "DL queued"
+    STATUS_QUEUEUP = "UL queued"
+    STATUS_PAUSED = "Paused"
+    STATUS_ARCHIVING = "Archiving"
+    STATUS_EXTRACTING = "Extracting"
+    STATUS_SPLITTING = "Splitting"
+    STATUS_CHECKING = "CheckUp"
+    STATUS_SEEDING = "Seeding"
 
 
 class setInterval:
@@ -171,12 +171,12 @@ def get_readable_message():
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
         msg += f"{escape(f'{download.name()}')}\n"
-        msg += f"<b>{download.status()}...</b>\n"
+        msg += f"by {source(download)}\n\n"
+        msg += f"<b>{download.status()}...</b>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
             msg += f"\n<code>{progress_bar(download.progress())}</code> {download.progress()}"
             msg += f"\n{download.processed_bytes()} of {download.size()}"
             msg += f"\nSpeed: {download.speed()}"
-            msg += f"\nBy: {source(download)}"
             msg += f'\nEstimated: {download.eta()}'
             if hasattr(download, 'seeders_num'):
                 try:
@@ -192,9 +192,7 @@ def get_readable_message():
         else:
             msg += f"\nSize: {download.size()}"
         msg += f"\nElapsed: {get_readable_time(time() - download.message.date.timestamp())}"
-        msg += f"\n/stop_{download.gid()[:8]}"
-        msg += f"\n<b>▬▬▬▬▬▬▬▬▬▬▬▬▬</b>"
-        msg += "\n\n"
+        msg += f"\n/stop_{download.gid()[:8]}\n\n"
     if len(msg) == 0:
         return None, None
     dl_speed = 0
@@ -212,10 +210,12 @@ def get_readable_message():
         buttons.ibutton("Prev", "status pre")
         buttons.ibutton(f"{PAGE_NO}/{PAGES}", "status ref")
         buttons.ibutton("Next", "status nex")
-        button = buttons.build_menu(3)    
-    msg += f"\n══❰ 𝐁𝐨𝐭 𝐌𝐢𝐫𝐫𝐨𝐫 𝐂𝐌𝐓 ❱══"        
-    msg += f"\n<b>🄳🅻</b>: {get_readable_file_size(up_speed)}/s⧩"
-    msg += f" | <b>>🅄🅻</b>: {get_readable_file_size(dl_speed)}/s◭"
+        button = buttons.build_menu(3)
+    msg += f"<b>• Tasks</b>: {tasks}{bmax_task}"
+    msg += f"\n<b>• Bot uptime</b>: {currentTime}"
+    msg += f"\n<b>• Free disk space</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
+    msg += f"\n<b>• Uploading speed</b>: {get_readable_file_size(up_speed)}/s"
+    msg += f"\n<b>• Downloading speed</b>: {get_readable_file_size(dl_speed)}/s"
     return msg, button
 
 
@@ -227,6 +227,7 @@ def text_to_bytes(size_text):
             size_value = float(size_text.split(unit)[0])
             return size_value * factor
     return 0
+
 
 async def turn_page(data):
     global STATUS_START, PAGE_NO
@@ -430,17 +431,6 @@ async def checking_access(user_id, button=None):
         button.ubutton('Collect token', tinyfy(short_url(f'https://telegram.me/{bot_name}?start={token}')))
         return f'Your token has expired, please collect a new token.\n<b>It will expire after {time_str}</b>!', button
     return None, button
-
-
-def format_validity_time(seconds):
-    periods = [('millennium', 31536000000), ('century', 3153600000), ('decade', 315360000), ('year', 31536000), ('month', 2592000), ('week', 604800), ('day', 86400), ('hour', 3600), ('minute', 60), ('second', 1)]
-    result = ''
-    for period_name, period_seconds in periods:
-        if seconds >= period_seconds:
-            period_value, seconds = divmod(seconds, period_seconds)
-            plural_suffix = 's' if period_value > 1 else ''
-            result += f'{int(period_value)} {period_name}{plural_suffix} '
-    return result
 
 
 def extra_btns(buttons):
