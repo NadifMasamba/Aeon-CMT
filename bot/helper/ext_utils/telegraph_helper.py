@@ -11,8 +11,8 @@ class TelegraphHelper:
         self.telegraph = Telegraph(domain='graph.org')
         self.short_name = token_hex(4)
         self.access_token = None
-        self.author_name = 'Aeon'
-        self.author_url = 'https://t.me/ProjectAeon'
+        self.author_name = 'Pea Masamba'
+        self.author_url = 'https://www.comelmuewa84.eu.org'
 
     async def create_account(self):
         await self.telegraph.create_account(
@@ -64,7 +64,7 @@ class TelegraphHelper:
                     nxt_page += 1
             await self.edit_page(
                 path = path[prev_page],
-                title = "Torrent Search",
+                title = "Pea Masamba Search",
                 content = content)
         return
 
