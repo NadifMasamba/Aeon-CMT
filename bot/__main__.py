@@ -51,24 +51,24 @@ async def stats(_, message):
         'Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
         'User task': config_dict.get('USER_MAX_TASKS', '∞')}
     system_info = f'<b>{quote}</b>\n\n'\
-        f'<code>• Bot uptime :</code> {currentTime}\n'\
-        f'<code>• Sys uptime :</code> {osUptime}\n'\
-        f'<code>• CPU usage  :</code> {cpuUsage}%\n'\
-        f'<code>• RAM usage  :</code> {memory.percent}%\n'\
-        f'<code>• Disk usage :</code> {disk}%\n'\
-        f'<code>• Free space :</code> {get_readable_file_size(free)}\n'\
-        f'<code>• Total space:</code> {get_readable_file_size(total)}\n\n'
+        f'<code>Bot uptime :</code> {currentTime}\n'\
+        f'<code>Sys uptime :</code> {osUptime}\n'\
+        f'<code>CPU usage  :</code> {cpuUsage}%\n'\
+        f'<code>RAM usage  :</code> {memory.percent}%\n'\
+        f'<code>Disk usage :</code> {disk}%\n'\
+        f'<code>Free space :</code> {get_readable_file_size(free)}\n'\
+        f'<code>Total space:</code> {get_readable_file_size(total)}\n\n'
             
     limitations = f'<b>LIMITATIONS</b>\n\n'
     
     for k, v in limit_mapping.items():
         if v == '':
-            v = '∞'
+            v = ''
         elif k != 'User task':
             v = f'{v}GB/Link'
         else:
             v = f'{v} Tasks/user'
-        limitations += f'<code>• {k:<11}:</code> {v}\n'
+        limitations += f'<code>{k:<11}:</code> {v}\n'
 
     stats = system_info + limitations
     reply_message = await sendMessage(message, stats, photo='IMAGES')
@@ -197,8 +197,8 @@ async def AeonCallback(_, query):
 @new_task
 async def log(_, message):
     buttons = ButtonMaker()
-    buttons.ibutton('Log display', f'aeon {message.from_user.id} logdisplay')
-    buttons.ibutton('Web paste', f'aeon {message.from_user.id} webpaste')
+    buttons.ibutton('Log display', f'peamasamba {message.from_user.id} logdisplay')
+    buttons.ibutton('Web paste', f'peamasamba {message.from_user.id} webpaste')
     reply_message = await sendFile(message, 'log.txt', buttons=buttons.build_menu(1))
     await deleteMessage(message)
     await five_minute_del(reply_message)
