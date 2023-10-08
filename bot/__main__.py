@@ -63,7 +63,7 @@ async def stats(_, message):
     
     for k, v in limit_mapping.items():
         if v == '':
-            v = '∞'
+            v = ''
         elif k != 'User task':
             v = f'{v}GB/Link'
         else:
