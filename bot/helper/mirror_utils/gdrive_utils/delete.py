@@ -16,7 +16,7 @@ async def delete_file(link):
     except Exception as e:
         LOGGER.error(f"Error deleting Google Drive file: {str(e)}")
         return f"An error occurred: {str(e)}"
-        
+
 @new_task
 async def deletefile(_, message):
     args = message.text.split()
@@ -26,7 +26,7 @@ async def deletefile(_, message):
         link = reply_to.text.split(maxsplit=1)[0].strip()
     else:
         link = ''
-        
+
     if is_gdrive_link(link):
         msg = await delete_file(link)
     else:
