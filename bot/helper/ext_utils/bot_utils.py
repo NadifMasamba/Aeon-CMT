@@ -176,7 +176,7 @@ def get_readable_message():
             msg += f"\n<code>{progress_bar(download.progress())}</code> {download.progress()}"
             msg += f"\n{download.processed_bytes()} of {download.size()}"
             msg += f"\nSpeed: {download.speed()}"
-            msg += f"by {source(download)}\n\n"
+            msg += f"\nBy: {source(download)}"
             msg += f'\nEstimated: {download.eta()}'
             if hasattr(download, 'seeders_num'):
                 try:
@@ -192,7 +192,7 @@ def get_readable_message():
         else:
             msg += f"\nSize: {download.size()}"
         msg += f"\nElapsed: {get_readable_time(time() - download.message.date.timestamp())}"
-        msg += f"\n/stop_{download.gid()[:8]}\n\n"
+        msg += f"\n/stop_{download.gid()[:8]}"
         msg += f"\n<b>▬▬▬▬▬▬▬▬▬▬▬▬▬</b>"
         msg += "\n\n"
     if len(msg) == 0:
@@ -214,8 +214,8 @@ def get_readable_message():
         buttons.ibutton("Next", "status nex")
         button = buttons.build_menu(3)    
     msg += f"\n══❰ 𝐁𝐨𝐭 𝐌𝐢𝐫𝐫𝐨𝐫 𝐂𝐌𝐓 ❱══"        
-    msg += f"\n<b>🄳🅻</b>: {get_readable_file_size(up_speed)}/s"
-    msg += f"\n<b>🅄🅻</b>: {get_readable_file_size(dl_speed)}/s"
+    msg += f"\n<b>🄳🅻</b>: {get_readable_file_size(up_speed)}/s⧩"
+    msg += f" | <b>>🅄🅻</b>: {get_readable_file_size(dl_speed)}/s◭"
     return msg, button
 
 
