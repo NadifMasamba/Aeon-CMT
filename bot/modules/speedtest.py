@@ -19,10 +19,10 @@ async def speedtest(_, message):
     result = test.results.dict()
     path = result['share']
     string_speed  = f"<b>SPEEDTEST INFO</b>\n\n"
-    string_speed += f"<b>• Ping:</b> <code>{result['ping']} ms</code>\n"
-    string_speed += f"<b>• Upload:</b> <code>{get_readable_file_size(result['upload'] / 8)}/s</code>\n"
-    string_speed += f"<b>• Download:</b> <code>{get_readable_file_size(result['download'] / 8)}/s</code>\n"
-    string_speed += f"<b>• IP Address:</b> <code>{result['client']['ip']}</code>"
+    string_speed += f"<b>Ping:</b> <code>{result['ping']} ms</code>\n"
+    string_speed += f"<b>Upload:</b> <code>{get_readable_file_size(result['upload'] / 8)}/s</code>\n"
+    string_speed += f"<b>Download:</b> <code>{get_readable_file_size(result['download'] / 8)}/s</code>\n"
+    string_speed += f"<b>IP Address:</b> <code>{result['client']['ip']}</code>"
     try:
         await sendMessage(message, string_speed, photo=path)
         await deleteMessage(speed)
