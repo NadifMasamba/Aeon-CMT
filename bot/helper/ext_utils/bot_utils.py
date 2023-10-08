@@ -157,7 +157,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = "<b><a href='https://subscene.com/u/1271292'>🄿🅴🄰 🅼🄰🅂🄰🅼🄱🄰</a> </b>\n"
+    msg = "<b><a href='https://subscene.com/u/1271292'>P̅e̅a̅ M̅a̅s̅a̅m̅b̅a̅</a> </b>\n"
     button = None
     tasks = len(download_dict)
     currentTime = get_readable_time(time() - botStartTime)
@@ -170,7 +170,7 @@ def get_readable_message():
         globals()['STATUS_START'] = STATUS_LIMIT * (PAGES - 1)
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
-        msg += f"<code><i>{escape(f'{download.name()}')}</code></i>\n"
+        msg += f"\n<code><i>{escape(f'{download.name()}')}</code></i>\n"
         msg += f"\n</b><code>{download.status()}</code>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
             msg += f"\n<b><code>{progress_bar(download.progress())} » <code>{download.progress()}</code></b>"
