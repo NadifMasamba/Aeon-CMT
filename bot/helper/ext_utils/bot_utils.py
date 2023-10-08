@@ -215,7 +215,7 @@ def get_readable_message():
         button = buttons.build_menu(3)    
     msg += f"\n══❰ 𝐁𝐨𝐭 𝐌𝐢𝐫𝐫𝐨𝐫 𝐂𝐌𝐓 ❱══"        
     msg += f"\n<b>🄳🅻</b>: {get_readable_file_size(up_speed)}/s⧩"
-    msg += f" | <b>>🅄🅻</b>: {get_readable_file_size(dl_speed)}/s◭"
+    msg += f" | <b>🅄🅻</b>: {get_readable_file_size(dl_speed)}/s◭"
     return msg, button
 
 
