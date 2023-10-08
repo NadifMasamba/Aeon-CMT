@@ -170,29 +170,29 @@ def get_readable_message():
         globals()['STATUS_START'] = STATUS_LIMIT * (PAGES - 1)
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
-        msg += f"{escape(f'{download.name()}')}\n"
+        msg += f"\n<b> <i>{escape(f'{download.name()}')}</i>\n\n"
         msg += f"<b><code>{download.status()}...</b></code>\n"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
             msg += f"\n<code>{progress_bar(download.progress())}</code> {download.progress()}"
             msg += f"\n{download.processed_bytes()} of {download.size()}"
-            msg += f"\n <b>Speed: <code>{download.speed()}</b></code>"
-            msg += f"\n <b>Source: <code>{source(download)}</b></code>"
-            msg += f'\n <b>Estimated: <code>{download.eta()}</b></code>'
+            msg += f"\n<b>Speed: <code>{download.speed()}</b></code>"
+            msg += f"\n<b>Source: <code>{source(download)}</b></code>"
+            msg += f'\n<b>Estimated: <code>{download.eta()}</b></code>'
             if hasattr(download, 'seeders_num'):
                 try:
-                    msg += f"\n <b>Seeders: <code>{download.seeders_num()} | <b>Leechers: <code>{download.leechers_num()}</b></code>"
+                    msg += f"\n<b>Seeders: <code>{download.seeders_num()} | <b>Leechers: <code>{download.leechers_num()}</b></code>"
                 except:
                     pass
         elif download.status() == MirrorStatus.STATUS_SEEDING:
-            msg += f"\n <b>Size: <code>{download.size()}</b></code>"
-            msg += f"\n <b>Speed: <code>{download.upload_speed()}</b></code>"
-            msg += f"\n <b>Uploaded: <code>{download.uploaded_bytes()}</b></code>"
-            msg += f"\n <b>Ratio: <code>{download.ratio()}</b></code>"
-            msg += f"\n <b>Time: <code>{download.seeding_time()}</b></code>"
+            msg += f"\n<b>Size: <code>{download.size()}</b></code>"
+            msg += f"\n<b>Speed: <code>{download.upload_speed()}</b></code>"
+            msg += f"\n<b>Uploaded: <code>{download.uploaded_bytes()}</b></code>"
+            msg += f"\n<b>Ratio: <code>{download.ratio()}</b></code>"
+            msg += f"\n<b>Time: <code>{download.seeding_time()}</b></code>"
         else:
-            msg += f"\n <b>Size: <code>{download.size()}</b></code>"
-        msg += f"\n <b>Elapsed: <code>{get_readable_time(time() - download.message.date.timestamp())}</b></code>"
-        msg += f"\n<b>/stop_{download.gid()[:8]}</b>"
+            msg += f"\n<b>Size: <code>{download.size()}</b></code>"
+        msg += f"\n<b>Elapsed: <code>{get_readable_time(time() - download.message.date.timestamp())}</b></code>"
+        msg += f"\n <b>Stop:</b> <code>/{download.gid()[:8]}</b></code>"
         msg += f"\n<b>▬▬▬▬▬▬▬▬▬▬▬▬▬</b>"
         msg += "\n\n"
     if len(msg) == 0:
