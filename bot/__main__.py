@@ -39,8 +39,8 @@ async def stats(_, message):
     memory = virtual_memory()
     currentTime = get_readable_time(time() - botStartTime)
     osUptime = get_readable_time(time() - boot_time())
+    cpuUsage = cpu_percent(interval=0.5)
     quote = Quote.print().split('―', 1)[0].strip().replace("“", "").replace("”", "")
-    cpuUsage = cpu_percent(interval=0.5)   
     limit_mapping = {
         'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
         'Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
@@ -51,24 +51,24 @@ async def stats(_, message):
         'Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
         'User task': config_dict.get('USER_MAX_TASKS', '∞')}
     system_info = f'<b>{quote}</b>\n\n'\
-        f'<code>Bot uptime :</code> {currentTime}\n'\
-        f'<code>Sys uptime :</code> {osUptime}\n'\
-        f'<code>CPU usage  :</code> {cpuUsage}%\n'\
-        f'<code>RAM usage  :</code> {memory.percent}%\n'\
-        f'<code>Disk usage :</code> {disk}%\n'\
-        f'<code>Free space :</code> {get_readable_file_size(free)}\n'\
-        f'<code>Total space:</code> {get_readable_file_size(total)}\n\n'
+        f'<code>• Bot uptime :</code> {currentTime}\n'\
+        f'<code>• Sys uptime :</code> {osUptime}\n'\
+        f'<code>• CPU usage  :</code> {cpuUsage}%\n'\
+        f'<code>• RAM usage  :</code> {memory.percent}%\n'\
+        f'<code>• Disk usage :</code> {disk}%\n'\
+        f'<code>• Free space :</code> {get_readable_file_size(free)}\n'\
+        f'<code>• Total space:</code> {get_readable_file_size(total)}\n\n'
             
     limitations = f'<b>LIMITATIONS</b>\n\n'
     
     for k, v in limit_mapping.items():
         if v == '':
-            v = ''
+            v = '∞'
         elif k != 'User task':
             v = f'{v}GB/Link'
         else:
             v = f'{v} Tasks/user'
-        limitations += f'<code>{k:<11}:</code> {v}\n'
+        limitations += f'<code>• {k:<11}:</code> {v}\n'
 
     stats = system_info + limitations
     reply_message = await sendMessage(message, stats, photo='IMAGES')
@@ -220,6 +220,7 @@ help_string = f'''<b>NOTE: Try each command without any arguments to see more de
 /{BotCommands.StatusCommand[0]} - Show status of all downloads.
 /{BotCommands.StatsCommand[0]} - Show stats of the machine hosting the bot.
 '''
+
 
 @new_task
 async def bot_help(client, message):
