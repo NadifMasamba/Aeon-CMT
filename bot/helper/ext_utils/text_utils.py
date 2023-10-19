@@ -66,7 +66,6 @@ uset_display_dict = {
             }
 
 nsfw_keywords = [
-    "xxx",
     "porn",
     "onlyfans",
     "nsfw",
